@@ -4,13 +4,15 @@ pipeline {
   stages {
     stage('Checkout') {
       steps {
-        git branch: 'main', url: 'https://github.com/kumar-animesh28/flask-express-app.git'
+        dir('/home/ubuntu/flask-express-app/frontend') {
+          git branch: 'main', url: 'https://github.com/kumar-animesh28/flask-express-app.git'
+        }
       }
     }
 
     stage('Install Dependencies') {
       steps {
-        dir('frontend') {
+        dir('/home/ubuntu/flask-express-app/frontend') {
           sh 'npm install'
         }
       }
