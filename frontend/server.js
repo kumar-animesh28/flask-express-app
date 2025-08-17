@@ -5,7 +5,7 @@ require("dotenv").config();
 
 app.get("/", async (req, res) => {
   try {
-    const response = await axios.get(`${process.env.BACKEND_URL}/api/quote`);
+    const response = await axios.get(`${process.env.BACKEND_URL || http://localhost:5000}/api/quote`);
     const quote = response.data.quote;
 
     res.send(`
