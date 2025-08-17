@@ -13,7 +13,7 @@ pipeline {
         dir('backend') {
           sh '''#!/bin/bash
 python3 -m venv .venv
-. .venv/bin/activate   # use dot instead of source
+. .venv/bin/activate
 pip install --upgrade pip
 pip install -r requirements.txt
 '''
