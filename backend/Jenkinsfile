@@ -13,7 +13,8 @@ pipeline {
         dir('backend') {
           sh '''#!/bin/bash
 python3 -m venv .venv
-. .venv/bin/activate
+. .venv/bin/activate   # use dot instead of source
+pip install --upgrade pip
 pip install -r requirements.txt
 '''
         }
@@ -22,7 +23,7 @@ pip install -r requirements.txt
 
     stage('Restart Service') {
       steps {
-        sh 'echo your_sudo_password | sudo -S systemctl restart flask-app'
+        sh 'sudo systemctl restart flask-app'
       }
     }
   }
