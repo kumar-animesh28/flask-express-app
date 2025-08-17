@@ -32,8 +32,8 @@ pipeline {
     stage('Deploy') {
       steps {
         sh '''
-          # Sync backend code to live directory
-          rsync -a --delete backend/ /home/ubuntu/flask-express-app/backend/
+          # Sync backend code to live directory using sudo
+          sudo rsync -a --delete /var/lib/jenkins/workspace/flask-backend/backend/ /home/ubuntu/flask-express-app/backend/
           sudo systemctl restart flask-app
         '''
       }
