@@ -4,7 +4,8 @@ pipeline {
   stages {
     stage('Checkout') {
       steps {
-        dir('/home/ubuntu/flask-express-app/frontend') {
+        // Checkout in Jenkins workspace
+        dir('frontend') {
           git branch: 'main', url: 'https://github.com/kumar-animesh28/flask-express-app.git'
         }
       }
@@ -12,15 +13,19 @@ pipeline {
 
     stage('Install Dependencies') {
       steps {
-        dir('/home/ubuntu/flask-express-app/frontend') {
+        dir('frontend') {
           sh 'npm install'
         }
       }
     }
 
-    stage('Restart Service') {
+    stage('Deploy') {
       steps {
-        sh 'sudo systemctl restart express-app'
+        sh '''
+          # Sync frontend code to live directory
+          rsync -a --delete frontend/ /home/ubuntu/flask-express-app/frontend/
+          sudo systemctl restart express-app
+        '''
       }
     }
   }

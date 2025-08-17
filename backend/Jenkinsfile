@@ -4,7 +4,8 @@ pipeline {
   stages {
     stage('Checkout') {
       steps {
-        dir('/home/ubuntu/flask-express-app/backend') {
+        // Checkout in Jenkins workspace
+        dir('backend') {
           git branch: 'main', url: 'https://github.com/kumar-animesh28/flask-express-app.git'
         }
       }
@@ -12,19 +13,28 @@ pipeline {
 
     stage('Install Dependencies') {
       steps {
-        dir('/home/ubuntu/flask-express-app/backend') {
-          sh '''#!/bin/bash
-. .venv/bin/activate
-pip install --upgrade pip
-pip install -r requirements.txt
-'''
+        dir('backend') {
+          sh '''
+            #!/bin/bash
+            if [ ! -d ".venv" ]; then
+              python3 -m venv .venv
+            fi
+            # Activate virtualenv for this shell
+            . .venv/bin/activate
+            pip install --upgrade pip
+            pip install -r requirements.txt
+          '''
         }
       }
     }
 
-    stage('Restart Service') {
+    stage('Deploy') {
       steps {
-        sh 'sudo systemctl restart flask-app'
+        sh '''
+          # Sync backend code to live directory
+          rsync -a --delete backend/ /home/ubuntu/flask-express-app/backend/
+          sudo systemctl restart flask-app
+        '''
       }
     }
   }
