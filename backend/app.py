@@ -8,6 +8,7 @@ quotes = [
     "Code is like humor. When you have to explain it, it’s bad.",
     "Simplicity is the soul of efficiency.",
     "Before software can be reusable it first has to be usable."
+    "The best way to predict the future is to invent it.",
 ]
 
 @app.route("/api/quote", methods=["GET"])
