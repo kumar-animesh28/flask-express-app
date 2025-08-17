@@ -10,6 +10,8 @@ quotes = [
     "Before software can be reusable it first has to be usable.",
     "The best way to predict the future is to invent it.",
     "Experience is the name everyone gives to their mistakes.",
+    "Programming is not about what you know; it’s about what you can figure out.",
+    "The only way to learn a new programming language is by writing programs in it.",
 ]
 
 @app.route("/api/quote", methods=["GET"])

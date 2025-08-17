@@ -12,7 +12,7 @@ app.get("/", async (req, res) => {
       <html>
         <body style="font-family: Arial; text-align:center; margin-top:50px;">
           <h1>Random Quote</h1>
-          <p style="font-size: 20px; color: orange">"${quote}"</p>
+          <p style="font-size: 20px; color: red">"${quote}"</p>
         </body>
       </html>
     `);
