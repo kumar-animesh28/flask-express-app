@@ -12,17 +12,17 @@ pipeline {
       steps {
         dir('backend') {
           sh '''#!/bin/bash
-          python3 -m venv .venv
-          source .venv/bin/activate
-          pip install -r requirements.txt
-          '''
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+'''
         }
       }
     }
 
     stage('Restart Service') {
       steps {
-        sh 'sudo systemctl restart flask-app'
+        sh 'echo your_sudo_password | sudo -S systemctl restart flask-app'
       }
     }
   }
