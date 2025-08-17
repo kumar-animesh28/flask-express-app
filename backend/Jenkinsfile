@@ -1,0 +1,27 @@
+pipeline {
+  agent any
+  tools { python 'Python3' }
+
+  stages {
+    stage('Checkout') {
+      steps { git branch: 'main', url: 'git@github.com:kumar-animesh28/flask-express-app.git' }
+    }
+
+    stage('Install Dependencies') {
+      steps {
+        dir('backend') {
+          sh '''
+            python3 -m venv .venv
+            source .venv/bin/activate
+            pip install --upgrade pip
+            pip install -r requirements.txt
+          '''
+        }
+      }
+    }
+
+    stage('Restart Service') {
+      steps { sh 'sudo systemctl restart flask-app' }
+    }
+  }
+}
