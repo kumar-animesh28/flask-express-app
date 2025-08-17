@@ -4,10 +4,7 @@ pipeline {
   stages {
     stage('Checkout') {
       steps {
-        // Checkout in Jenkins workspace
-        dir('backend') {
-          git branch: 'main', url: 'https://github.com/kumar-animesh28/flask-express-app.git'
-        }
+        git branch: 'main', url: 'https://github.com/kumar-animesh28/flask-express-app.git'
       }
     }
 
@@ -16,11 +13,15 @@ pipeline {
         dir('backend') {
           sh '''
             #!/bin/bash
+            # Create virtualenv if not exists
             if [ ! -d ".venv" ]; then
               python3 -m venv .venv
             fi
+
             # Activate virtualenv for this shell
             . .venv/bin/activate
+
+            # Upgrade pip and install requirements
             pip install --upgrade pip
             pip install -r requirements.txt
           '''

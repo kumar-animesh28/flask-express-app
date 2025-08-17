@@ -4,10 +4,7 @@ pipeline {
   stages {
     stage('Checkout') {
       steps {
-        // Checkout in Jenkins workspace
-        dir('frontend') {
-          git branch: 'main', url: 'https://github.com/kumar-animesh28/flask-express-app.git'
-        }
+        git branch: 'main', url: 'https://github.com/kumar-animesh28/flask-express-app.git'
       }
     }
 
