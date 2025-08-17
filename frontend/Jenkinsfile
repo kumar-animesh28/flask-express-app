@@ -1,10 +1,11 @@
 pipeline {
   agent any
-  tools { nodejs 'NodeJS' }
 
   stages {
     stage('Checkout') {
-      steps { git branch: 'main', url: 'git@github.com:kumar-animesh28/flask-express-app.git' }
+      steps {
+        git branch: 'main', url: 'git@github.com:kumar-animesh28/flask-express-app.git'
+      }
     }
 
     stage('Install Dependencies') {
@@ -16,7 +17,9 @@ pipeline {
     }
 
     stage('Restart Service') {
-      steps { sh 'sudo systemctl restart express-app' }
+      steps {
+        sh 'sudo systemctl restart express-app'
+      }
     }
   }
 }
